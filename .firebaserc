@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "resetemailccc",
-    "prod": "resetemailccc"
+    "default": "ldapccc",
+    "prod": "ldapccc"
   },
   "targets": {}
 }

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import withAuth from './withAuth';
 import { useUser } from './useUser';
 import config from '../config';
+import ReactCaptcha from "modern-react-captcha"
 
 const sendRequest = (setResponse) => {
   config.auth().currentUser.getIdToken(true).then(function(token) {
-    const helloUserUrl = "https://us-central1-resetemailccc.cloudfunctions.net/app/hello"
-    //const helloUserUrl = "http://localhost:5001/resetemailccc/us-central1/app/hello"
+    const helloUserUrl = "localhost:5000/reset_password"
     document.cookie = '__session=' + token + ';max-age=3600';
     console.log('Sending request to', helloUserUrl, 'with ID token in __session cookie.');
     let req = new XMLHttpRequest();
@@ -26,16 +26,28 @@ const sendRequest = (setResponse) => {
 
 
 const Private = () => {
-  const { user, logout } = useUser();
-  const [ response, setResponse ] = useState("");
+  const { user, logout } = useUser()
+  const [ response, setResponse ] = useState("")
   const [ disabled, setDisabled ] = useState(false)
+  const [captchaMatch, setCaptchaMatch] = useState(false)
+
   return (
     <div >
     { user?.email && <>
       <div>{user.email}</div>
       <hr />
       <div>
-          <button disabled={disabled} onClick={() => setDisabled(true) || sendRequest(setResponse)}>Resetar Senha LCC</button>
+      <ReactCaptcha
+				charset='ulns'
+				length={6}
+				color='white'
+				bgColor='black'
+				reload={true}
+				reloadText='Recarregar captcha'
+				handleSuccess={() => setCaptchaMatch(true)}
+				handleFailure={() => setCaptchaMatch(false)} />
+
+          <button disabled={!captchaMatch} onClick={() => setCaptchaMatch(false) || sendRequest(setResponse)}>Resetar Senha LCC</button>
           <div>
             { response && <span>{response}</span>}
           </div>
