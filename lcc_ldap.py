@@ -10,6 +10,7 @@ load_dotenv()
 def change_pass(user, new_password):
     domain = "dc=lcc,dc=ufcg,dc=edu,dc=br"
     server = '150.165.42.41'
+    print(os.getenv("LDAP_PASS"))
     l = ldap.initialize('ldap://%s' % server)
     l.simple_bind_s("cn=admin," + domain, os.getenv('LDAP_PASS'))
     tdn="uid=" + user + ",ou=People," + domain

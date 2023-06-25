@@ -3,12 +3,12 @@ import "firebase/compat/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAIGYuu7D9tZgHnke858a0KTFzrU9dZk6g",
-  authDomain: "ldapccc.firebaseapp.com",
-  projectId: "ldapccc",
-  storageBucket: "ldapccc.appspot.com",
-  messagingSenderId: "622000314719",
-  appId: "1:622000314719:web:a31657c3c4e4095ebd7eea"
+  apiKey: "AIzaSyD52Ro63lKnWE1FT1S4XaCGKcuauY_faoc",
+  authDomain: "resetemailccc.firebaseapp.com",
+  projectId: "resetemailccc",
+  storageBucket: "resetemailccc.appspot.com",
+  messagingSenderId: "299435504310",
+  appId: "1:299435504310:web:abbf5541e84d763fca6c17"
 };
 
 const app = firebase.initializeApp(firebaseConfig);

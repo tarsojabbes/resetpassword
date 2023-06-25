@@ -6,7 +6,7 @@ import ReactCaptcha from "modern-react-captcha"
 
 const sendRequest = (setResponse) => {
   config.auth().currentUser.getIdToken(true).then(function(token) {
-    const helloUserUrl = "localhost:5000/reset_password"
+    const helloUserUrl = "https://us-central1-resetemailccc.cloudfunctions.net/app/hello"
     document.cookie = '__session=' + token + ';max-age=3600';
     console.log('Sending request to', helloUserUrl, 'with ID token in __session cookie.');
     let req = new XMLHttpRequest();
@@ -30,6 +30,7 @@ const Private = () => {
   const [ response, setResponse ] = useState("")
   const [ disabled, setDisabled ] = useState(false)
   const [captchaMatch, setCaptchaMatch] = useState(false)
+  const [reloadCaptcha, setReloadCaptcha] = useState(false)
 
   return (
     <div >
@@ -44,7 +45,7 @@ const Private = () => {
 				bgColor='black'
 				reload={true}
 				reloadText='Recarregar captcha'
-				handleSuccess={() => setCaptchaMatch(true)}
+				handleSuccess={() => {setCaptchaMatch(true)}}
 				handleFailure={() => setCaptchaMatch(false)} />
 
           <button disabled={!captchaMatch} onClick={() => setCaptchaMatch(false) || sendRequest(setResponse)}>Resetar Senha LCC</button>
